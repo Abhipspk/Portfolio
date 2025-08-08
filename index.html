@@ -1,0 +1,621 @@
+]<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dharmarajula Abhilash | Data Analyst Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== CSS VARIABLES & THEME SETUP ===== */
+        :root {
+            /* Default Theme: White & Orange */
+            --primary-bg-start: #ffffff;
+            --primary-bg-end: #f0f2f5;
+            --accent-color: #ff6b6b; /* A vibrant red-orange */
+            --text-color: #333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --icon-color: currentColor;
+        }
+
+        .light-mode {
+            /* Optional Light Mode: White & Gemini Blue (a different, clean option) */
+            --primary-bg-start: #ffffff;
+            --primary-bg-end: #f0f2f5;
+            --accent-color: #007bff; /* A clean, modern blue */
+            --text-color: #333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --header-bg: rgba(255, 255, 255, 0.85);
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --icon-color: #007bff;
+        }
+
+        /* ===== GLOBAL STYLING ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            perspective: 1000px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-bg-start), var(--primary-bg-end));
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(2em, 5vw, 2.5em);
+            color: var(--text-color);
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===== NAVBAR & HAMBURGER MENU ===== */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            transition: background 0.3s;
+        }
+
+        header .logo a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            justify-content: space-between;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-color);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--header-bg);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                display: none;
+                text-align: center;
+                padding: 20px 0;
+            }
+            nav.open {
+                display: flex;
+            }
+            nav a {
+                margin: 10px 0;
+            }
+        }
+
+        /* ===== THEME TOGGLE BUTTON ===== */
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5em, 8vw, 4em);
+            color: var(--text-color);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 20px auto;
+            font-size: 1.2em;
+            color: var(--text-color);
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .hero .buttons {
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        .hero .buttons a {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 10px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .hero .buttons .primary {
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        .hero .buttons a:hover {
+            transform: translateY(-8px) rotateX(10deg);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+        
+        .hero .buttons .secondary {
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .light-mode .hero .buttons .primary {
+            color: #fff;
+        }
+
+        /* ===== SECTION STYLING ===== */
+        main section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .about-container img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            box-shadow: 0 10px 20px var(--shadow-color);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .about-container img:hover {
+            transform: scale(1.05) rotateY(15deg) rotateZ(3deg);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        /* ===== CARD STYLING (3D Effect) ===== */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        /* ===== GRID LAYOUTS ===== */
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* ===== CERTIFICATIONS & PROJECTS ===== */
+        .card.link-card {
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+        }
+
+        .project-card h3 {
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-card a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card a:hover {
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .skill:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Styling for the embedded SVG */
+        .skill svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .skill img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* ===== CONTACT & FOOTER ===== */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .contact-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            color: var(--text-color);
+            background: var(--card-bg);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+        
+        .contact-links a:hover {
+            background: var(--accent-color);
+            color: #fff;
+            transform: translateY(-8px) rotateX(15deg);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .contact-links a svg {
+            fill: currentColor;
+            width: 24px;
+            height: 24px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: var(--text-color);
+            background: var(--header-bg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="#home">Abhilash</a></div>
+        <button class="nav-toggle" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="main-nav">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark themes">🌙</button>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <h1>Hello, I'm <span class="highlight">Dharmarajula Abhilash</span></h1>
+            <p>A data-driven analyst passionate about transforming raw data into meaningful insights to help organizations make informed decisions.</p>
+            <div class="buttons">
+                <a href="#projects" class="primary">View Projects</a>
+                <a href="analyst_resume.pdf" class="secondary" download>Download Resume</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-container">
+                <img src="Image.jpg" alt="Profile Picture">
+                <div class="about-text card">
+                    <p>I am a data analyst with expertise in **Power BI**, **SQL**, and **Python**. I specialize in building dynamic dashboards, performing comprehensive data analysis, and using data storytelling to communicate complex findings simply. My goal is to leverage data to solve real-world problems and drive strategic growth.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3>MCA</h3>
+                    <p>Central University of Karnataka (2023–2025)</p>
+                </div>
+                <div class="card">
+                    <h3>B.Sc in Computer Science</h3>
+                    <p>Kakatiya University (2020–2023)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="grid grid-3">
+                <a href="https://coursera.org/share/3562f7d60dee049d37859aedf41af930" target="_blank" class="card link-card">
+                    <h3>Google Data Analytics</h3>
+                    <p>Coursera</p>
+                </a>
+                <a href="https://coursera.org/share/bd7be921074676f43cd1fa23c4ed3143" target="_blank" class="card link-card">
+                    <h3>Google Business Intelligence</h3>
+                    <p>Coursera</p>
+                </a>
+                <a href="certificate.pdf" target="_blank" class="card link-card">
+                    <h3>Data Analyst Essentials</h3>
+                    <p>Cisco Networking Academy</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="grid grid-2">
+                <div class="card project-card">
+                    <h3>E-Commerce Sales & Sentiment Analysis</h3>
+                    <p>A dynamic Power BI dashboard analyzing sales trends and customer sentiment using Twitter and Google Trends data.</p>
+                    <a href="https://github.com/Abhipspk/ecommerce-powerbi-dashboard" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="card project-card">
+                    <h3>CTA Ridership Analysis</h3>
+                    <p>Analyzed CTA ridership data for seasonal trends and provided optimization recommendations for public transport services.</p>
+                    <a href="https://github.com/Abhipspk/cta-ridership-analysis-powerbi" target="_blank">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL">
+                    <p>SQL</p>
+                </div>
+                <div class="skill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                    <p>Python</p>
+                </div>
+                <div class="skill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas">
+                    <p>Pandas</p>
+                </div>
+                <div class="skill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy">
+                    <p>NumPy</p>
+                </div>
+                <div class="skill">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Power BI</title>
+                        <path d="M12.247 16.291c-1.378-.027-2.617-.442-3.79-1.258a6.598 6.598 0 01-1.127-.852 5.04 5.04 0 01-1.134-1.31 5.39 5.39 0 01-.643-1.636 4.757 4.757 0 01-.218-1.928c.071-.786.326-1.503.791-2.195.46-.692 1.054-1.226 1.776-1.603.722-.377 1.558-.592 2.493-.655 1.01-.069 2.053-.05 3.013.064l1.373.167c1.373.18 2.535.617 3.633 1.254.896.518 1.633 1.155 2.222 1.956.59.8 1.011 1.691 1.242 2.664.23.972.3 2.043.235 3.085-.11 1.78-.696 3.14-1.745 4.095-.733.666-1.57 1.085-2.58 1.272-.94.175-1.93.208-2.883.087-.954-.121-1.84-.378-2.673-.772-.832-.395-1.52-.924-2.148-1.564zM2.871 11.236c-.053.864.06 1.61.464 2.222.404.612.983 1.01 1.701 1.199.718.189 1.48.163 2.244-.069l3.056-.566-2.502-4.148c-.68.225-1.306.574-1.884 1.047-.577.472-1.017 1.036-1.353 1.677-.336.642-.51 1.343-.497 2.072zm1.905-.71c.218-.466.565-.845 1.066-1.134.5-.29 1.066-.452 1.74-.474.32-.014.652.003.969.049l1.109.16 2.01 3.52c-.66.088-1.31.114-1.928.058-1.127-.107-2.162-.48-3.085-1.134-.73-.526-1.282-1.22-1.72-2.112zM9.54 13.91l-1.328.214c-.655.107-1.25.074-1.74-.094-.492-.167-.935-.494-1.298-.925-.363-.431-.628-.973-.765-1.565-.138-.59-.115-1.195.068-1.782.183-.586.495-1.11.905-1.543.41-.433.896-.757 1.43-.97.534-.213 1.1-.315 1.703-.315l1.62.155 1.15 1.942-2.735 2.858zM15.013 15.39c.677-.282 1.258-.696 1.74-1.235.482-.538.835-1.155 1.082-1.84.246-.685.342-1.425.29-2.164-.053-.74-.25-1.41-.59-2.023-.34-0.612-.79-1.11-1.353-1.49-.564-.38-1.21-.595-1.906-.65-.694-.056-1.4-.047-2.06.028l-2.01.215 1.41 2.378c.552-.165 1.082-.24 1.583-.243 1.197-.008 2.274.35 3.11 1.082.836.732 1.343 1.688 1.517 2.766.174 1.078.077 2.124-.29 3.013-.368.89-1.025 1.57-1.975 2.012-.85.396-1.785.6-2.72.612l-1.21-.013-1.173-1.956c.528-.152 1.018-.363 1.488-.636.47-.273.864-.593 1.19-1.012l1.63 1.72c-.52.483-1.134.86-1.874 1.133-.74.272-1.558.41-2.435.41a6.62 6.62 0 01-1.85-.24c-.933-.242-1.758-.638-2.528-1.19l1.173-1.956 1.144 1.956c.382.492.83.858 1.35 1.096.52.238 1.066.353 1.62.353.555 0 1.07-.107 1.543-.321.474-.214.88-.506 1.242-.87zM11.666 4.384c.66-.088 1.31-.114 1.928-.058 1.127.107 2.162.48 3.085 1.134.73.526 1.282 1.22 1.72 2.112l-2.28 3.818-1.517-2.628c-.62-.187-1.22-.275-1.772-.25l-1.39.062-1.066-1.637c.362-.395.772-.716 1.235-.972.46-.257.94-.424 1.46-.51zM11.163 10.97c-.36.216-.67.433-.94.65l-1.465.733-1.79-.17c-.42.062-.806.138-1.18-.21-.37-.348-.6-.827-.66-1.385-.06-.558.05-1.1.34-1.61.29-.51.724-.925 1.267-1.215.542-.29 1.148-.426 1.785-.418l2.06.07 1.583 2.203zM14.07 7.027c-.244.316-.492.65-.772.99l-2.074 2.825 1.543 2.6c.552.165 1.082.24 1.583.243 1.197.008 2.274-.35 3.11-1.082.836-.732 1.343-1.688 1.517-2.766.174-1.078.077-2.124-.29-3.013-.368-.89-1.025-1.57-1.975-2.012-.85-.396-1.785-.6-2.72-.612l-1.34.017-1.083 1.834z"/>
+                    </svg>
+                    <p>Power BI</p>
+                </div>
+                <div class="skill">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Microsoft Excel</title>
+                        <path d="M23.953 3.09h-3.411v5.116h2.246v.835h-2.246v7.359h3.411v.835h-4.246V2.255h4.246v.835zM11.233 2.255h-4.246v.835h3.411v5.116h-2.246v.835h2.246v7.359h-3.411v.835h4.246V2.255zm7.251 0h-4.246v.835h3.411v5.116h-2.246v.835h2.246v7.359h-3.411v.835h4.246V2.255zM.001 3.09h3.411v5.116h-2.246v.835h2.246v7.359h-3.411v.835h4.246V2.255H.001v.835z"/>
+                    </svg>
+                    <p>Excel</p>
+                </div>
+                <div class="skill">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Tableau</title>
+                        <path d="M10.111 14.179h1.109V11.23h2.822V10.15h-2.822V7.127H10.111v3.023h-2.75V11.23h2.75zm-4.322 8.528h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zm-6.425 2.1h1.109V11.23h2.822V10.15h-2.822V7.127H12.336v3.023h-2.75V11.23h2.75zm-4.322 8.528h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zM12.336 21.611h1.109v-2.909h2.822v-.837h-2.822v-2.909H12.336v2.909h-2.75v.837h2.75zm-4.322 2.096h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zm-6.425 2.1h1.109V11.23h2.822V10.15h-2.822V7.127H12.336v3.023h-2.75V11.23h2.75zm-4.322 8.528h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zM12.336 2.096h1.109V-.814h2.822V-1.65h-2.822V-4.56H12.336v2.909h-2.75V-1.65h2.75zm-4.322 2.096h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zm-6.425 2.1h1.109V11.23h2.822V10.15h-2.822V7.127H12.336v3.023h-2.75V11.23h2.75zm-4.322 8.528h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zM12.336 21.611h1.109v-2.909h2.822v-.837h-2.822v-2.909H12.336v2.909h-2.75v.837h2.75zm-4.322 2.096h.941v-2.698h2.493v-.84h-2.493v-2.73H5.789v2.73H3.295v.84h2.494zm12.981-8.529h.941v-2.701h2.525v-.838h-2.525V9.124h-.941v2.73h-2.525v.838h2.525zm-6.425 2.1h1.109V11.23h2.822V10.15h-2.822V7.127H12.336v3.023h-2.75V11.23h2.75z"/>
+                    </svg>
+                    <p>Tableau</p>
+                </div>
+                <div class="skill">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R Programming">
+                    <p>R Programming</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <div class="contact-links">
+                <a href="mailto:abhipspk1289@gmail.com">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Email</title>
+                        <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+                    </svg> Email
+                </a>
+                <a href="https://github.com/Abhipspk" target="_blank">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>GitHub</title>
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.043-1.61-4.043-1.61-.546-1.387-1.332-1.758-1.332-1.758-1.09-.744.082-.729.082-.729 1.205.084 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.495.998.108-.775.419-1.305.762-1.605-2.665-.3-5.464-1.332-5.464-5.94 0-1.312.465-2.385 1.235-3.22-.135-.303-.54-1.52.128-3.18 0 0 1.005-.323 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.295-1.553 3.3-1.23 3.3-1.23.668 1.66.262 2.877.127 3.18.77.835 1.235 1.913 1.235 3.22 0 4.62-2.804 5.625-5.474 5.925.43.37.81 1.096.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .323.21.697.825.577C20.565 22.092 24 17.59 24 12.297c0-6.627-5.373-12-12-12z"/>
+                    </svg> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/dharmarajula-abhilash" target="_blank">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>LinkedIn</title>
+                        <path d="M20.447 20.452h-3.554v-5.568c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.666H9.153V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.815 0-3.298-1.483-3.298-3.316S3.522.8 5.337.8c1.817 0 3.298 1.483 3.298 3.316S7.154 7.433 5.337 7.433zM7.172 20.452H3.556V9h3.616v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.455c.981 0 1.774-.773 1.774-1.729V1.729C24 .774 23.206 0 22.225 0z"/>
+                    </svg> LinkedIn
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Dharmarajula Abhilash. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            const themeToggle = document.getElementById('theme-toggle');
+
+            // --- Toggle mobile navigation menu ---
+            navToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', mainNav.classList.contains('open'));
+            });
+
+            // --- Theme toggle functionality ---
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                // Store user preference in localStorage
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '🌙';
+                }
+            });
+
+            // --- Load theme preference from localStorage ---
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                themeToggle.innerHTML = '☀️';
+            }
+        });
+    </script>
+</body>
+</html>
